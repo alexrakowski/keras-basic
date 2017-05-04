@@ -25,8 +25,12 @@ def train():
     print(model.summary())
 
     # Train the model
+    checkpoints_filepath = os.path.join(CHECKPOINTS_DIR,
+                                        '{}_{}.hdf5'.format(model.name, datetime.datetime.now().strftime("%Y%m%d_%H%M")
+                                                            ))
     callbacks = [TensorBoard(log_dir='./tensorboard', write_images=True),
-                 ModelCheckpoint(filepath=os.path.join(CHECKPOINTS_DIR, 'weights.hdf5'), verbose=1,
+                 ModelCheckpoint(filepath=checkpoints_filepath,
+                                 verbose=1,
                                  save_best_only=True),
                  ]
     model.fit_generator(

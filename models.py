@@ -17,4 +17,5 @@ def simple(no_classes, input_shape):
 
     model.add(Dense(last_layer_outputs, activation=activation))
     model.compile(loss=loss, optimizer='adam', metrics=['accuracy'])
+    model.__setattr__('name', 'simple')
     return model
