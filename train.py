@@ -1,9 +1,10 @@
 import os
 
+import datetime
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard
 from models import simple
-from data import gen_data
+from data import gen_data, DATA_DIM, NO_CLASSES
 
 CHECKPOINTS_DIR = './checkpoints'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -20,8 +21,8 @@ def train():
     test_data_path = ''
 
     # Create the model
-    input_shape = IMG_DIMS
-    model = simple(no_classes=3, input_shape=input_shape)
+    input_shape = DATA_DIM
+    model = simple(no_classes=NO_CLASSES, input_shape=input_shape)
     print(model.summary())
 
     # Train the model
@@ -35,7 +36,7 @@ def train():
                  ]
     model.fit_generator(
         gen_data(dataset_path=train_data_path),
-        epochs=50,
+        epochs=1500,
         steps_per_epoch=64,
         validation_data=gen_data(dataset_path=test_data_path),
         validation_steps=16,

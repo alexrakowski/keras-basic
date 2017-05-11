@@ -1,10 +1,12 @@
-from keras.engine import Model
+from keras.layers import Dense
 from keras.models import Sequential
 
 
 def simple(no_classes, input_shape):
     model = Sequential()
-    model.add(Dense(1024, activation='relu', input_shape=input_shape))
+    model.add(Dense(128, activation='relu', input_shape=input_shape))
+    model.add(Dense(128, activation='relu', ))
+    model.add(Dense(128, activation='relu', ))
 
     if no_classes > 2:
         activation = 'softmax'
